@@ -1,6 +1,9 @@
+import { EmailSignup } from "@/components/EmailSignup";
+import { IngredientHighlights } from "@/components/IngredientHighlights";
+
 export default function Home() {
   return (
-    <main className="site-shell">
+    <main className="page-shell">
       <section className="hero" aria-labelledby="hero-heading">
         <p className="eyebrow">CUIVRÉ</p>
         <h1 id="hero-heading">Copper peptide skincare, made complete.</h1>
@@ -13,6 +16,19 @@ export default function Home() {
           View the formula
         </a>
       </section>
+      <IngredientHighlights />
+      <section className="section split-section">
+        <div className="section-heading">
+          <p className="eyebrow">Barrier care</p>
+          <h2>Less noise. More structure.</h2>
+        </div>
+        <p className="section-copy">
+          This is not a single-ingredient bet. CUIVRÉ pairs the studied copper
+          peptide GHK-Cu with barrier lipids and a rich moisturizing base so the
+          formula works as a whole.
+        </p>
+      </section>
+      <EmailSignup />
     </main>
   );
 }
