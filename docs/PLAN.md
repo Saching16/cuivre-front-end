@@ -49,32 +49,60 @@ Build a custom Next.js storefront for CUIVRÉ's single-product skincare launch. 
    - Scaffold a Next.js App Router project.
    - Add TypeScript, ESLint, and basic formatting defaults.
    - Set up global styles, fonts, colors, and base layout metadata.
+   - Verification before next step:
+     - `npm install` completes without dependency errors.
+     - `npm run lint` passes.
+     - `npm run build` passes.
+     - The default app loads locally with the brand colors and fonts applied.
 
 2. Build Shopify data access
    - Add a small Storefront API client.
    - Create GraphQL queries for the single product by handle or known identifier.
    - Create cart mutations for `cartCreate`, `cartLinesAdd`, `cartLinesUpdate`, and `cartLinesRemove` as needed.
    - Store the Shopify cart id in a browser cookie or local storage.
+   - Verification before next step:
+     - Storefront API requests use the configured store domain and token.
+     - Product query returns the expected product when it is available to the Storefront API.
+     - Cart creation returns a cart id and `checkoutUrl`.
+     - No private token appears in client-side code or browser-visible output.
 
 3. Build core pages
    - Homepage with hero, formula explanation, ingredient highlights, product CTA, and signup section.
    - Product page with product data from Shopify, fallback image treatment, ingredient content, and add-to-cart.
    - Cart view or cart drawer with line item quantity controls, subtotal display, and checkout CTA.
+   - Verification before next step:
+     - Homepage renders on desktop and mobile without layout breakage.
+     - Product page renders with live Shopify data when available.
+     - Product page renders a polished placeholder when images are missing.
+     - Cart UI shows line items, quantities, subtotal, and checkout CTA correctly.
 
 4. Implement checkout redirect
    - Use the cart's `checkoutUrl` from Shopify.
    - Redirect the visitor to Shopify hosted checkout.
    - Keep frontend payment responsibilities limited to cart creation and checkout redirect.
+   - Verification before next step:
+     - Adding the product creates or reuses a Shopify cart.
+     - Checkout CTA redirects to the Shopify hosted checkout URL.
+     - No card, tax, shipping, or order logic exists in the frontend.
 
 5. Add email signup
    - Start with a simple form and clear success/error states.
    - Wire to a provider or backend route once the destination is chosen.
    - Avoid blocking storefront launch on advanced email automation.
+   - Verification before next step:
+     - Empty and invalid submissions show clear validation feedback.
+     - Successful submissions show a calm confirmation message.
+     - Signup failures show a useful retry message without losing the entered email.
+     - The email integration is isolated enough to replace if the provider changes.
 
 6. Handle content and edge cases
    - Display product title, price, description, and ingredients from Shopify when available.
    - Provide a polished placeholder state while product images are missing.
    - Show useful unavailable states if the product is draft, unpublished, or missing from the Storefront API.
+   - Verification before next step:
+     - Missing images do not create broken image icons or layout shifts.
+     - Draft, unpublished, or missing product responses show a clear unavailable state.
+     - Product copy matches the CUIVRÉ voice and avoids urgency or miracle claims.
 
 7. Test the flow
    - Verify homepage and product page render without Shopify images.
@@ -82,12 +110,22 @@ Build a custom Next.js storefront for CUIVRÉ's single-product skincare launch. 
    - Verify add-to-cart creates or reuses a cart.
    - Verify checkout redirects to Shopify's hosted checkout URL.
    - Verify no private token appears in client bundles or browser-visible code.
+   - Verification before next step:
+     - Manual smoke test passes from homepage to product page to cart to Shopify checkout.
+     - `npm run lint` passes.
+     - `npm run build` passes.
+     - Any focused automated tests added for Shopify/cart helpers pass.
 
 8. Prepare for launch
    - Add minimal README setup instructions.
    - Configure Vercel environment variables.
    - Confirm Shopify product is published to the Storefront sales channel before launch.
    - Run lint and production build before deployment.
+   - Verification before launch:
+     - README setup steps work from a clean checkout.
+     - Vercel preview deploy builds successfully.
+     - Required environment variables are configured in the deployment target.
+     - Shopify checkout works from the deployed preview.
 
 ## Suggested File Structure
 

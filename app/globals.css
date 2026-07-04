@@ -1,0 +1,85 @@
+:root {
+  --color-navy: #141631;
+  --color-cream: #f5f0e6;
+  --color-copper: #c08a5c;
+  --color-muted-navy: #39406b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-navy);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top right, rgba(192, 138, 92, 0.18), transparent 34rem),
+    var(--color-navy);
+  color: var(--color-cream);
+  font-family: var(--font-body), Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.site-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 2rem;
+}
+
+.hero {
+  width: min(100%, 58rem);
+  border: 1px solid var(--color-muted-navy);
+  padding: clamp(2rem, 7vw, 5rem);
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  color: var(--color-copper);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(3.5rem, 10vw, 7.75rem);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+.hero-copy {
+  max-width: 42rem;
+  margin: 1.5rem 0 2rem;
+  color: rgba(245, 240, 230, 0.82);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  border: 1px solid var(--color-copper);
+  padding: 0.8rem 1.25rem;
+  background: var(--color-copper);
+  color: var(--color-navy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-cream);
+  outline-offset: 4px;
+}
