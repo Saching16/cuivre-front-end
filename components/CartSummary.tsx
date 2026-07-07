@@ -161,7 +161,10 @@ export function CartSummary() {
           )}
         </strong>
       </div>
-      <a className="button" href={cart.checkoutUrl}>
+      <a
+        className="button"
+        href={`/checkout?cartId=${encodeURIComponent(cart.id)}`}
+      >
         Continue to checkout
       </a>
     </section>
