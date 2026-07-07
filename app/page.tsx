@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <main className="page-shell">
       <section className="hero" aria-labelledby="hero-heading">
-        <p className="eyebrow">CUIVRÉ</p>
-        <h1 id="hero-heading">Copper peptide skincare, made complete.</h1>
+        <p className="eyebrow">Copper Peptide Moisturizer</p>
+        <h1 id="hero-heading">Cuivré.</h1>
         <p className="hero-copy">
           GHK-Cu is the foundation. Ceramides restore the barrier. Shea butter
           carries the moisture. A precise formula for skin that feels cared for,

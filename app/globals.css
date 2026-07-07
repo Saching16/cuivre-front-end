@@ -1,10 +1,27 @@
 :root {
-  --color-navy: #141631;
+  --color-navy: #151b52;
+  --color-royal-deep: #0d1140;
+  --color-royal-bright: #2c3aa0;
   --color-cream: #f5f0e6;
   --color-copper: #c08a5c;
-  --color-muted-navy: #39406b;
-  --color-panel: rgba(20, 22, 49, 0.72);
-  --color-cream-muted: rgba(245, 240, 230, 0.72);
+  --color-copper-light: #ecbe8e;
+  --color-copper-deep: #96602f;
+  --color-muted-navy: #4a55a4;
+  --color-panel: rgba(17, 22, 74, 0.66);
+  --color-cream-muted: rgba(245, 240, 230, 0.78);
+  --gradient-copper: linear-gradient(
+    180deg,
+    var(--color-copper-light) 0%,
+    var(--color-copper) 48%,
+    var(--color-copper-deep) 100%
+  );
+  --gradient-copper-text: linear-gradient(
+    100deg,
+    var(--color-copper-deep) 0%,
+    var(--color-copper-light) 38%,
+    var(--color-copper) 62%,
+    var(--color-copper-light) 100%
+  );
 }
 
 * {
@@ -13,15 +30,20 @@
 
 html {
   min-height: 100%;
-  background: var(--color-navy);
+  background: var(--color-royal-deep);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at top right, rgba(192, 138, 92, 0.18), transparent 34rem),
-    var(--color-navy);
+    radial-gradient(circle at 85% -5%, rgba(236, 190, 142, 0.22), transparent 36rem),
+    radial-gradient(circle at 8% 30%, rgba(44, 58, 160, 0.55), transparent 44rem),
+    linear-gradient(112deg, transparent 32%, rgba(63, 79, 190, 0.4) 44%, transparent 52%),
+    linear-gradient(118deg, transparent 58%, rgba(44, 58, 160, 0.5) 72%, transparent 84%),
+    linear-gradient(105deg, transparent 12%, rgba(84, 100, 216, 0.24) 20%, transparent 30%),
+    linear-gradient(165deg, var(--color-navy) 0%, var(--color-royal-deep) 60%, #0a0d33 100%);
+  background-attachment: fixed;
   color: var(--color-cream);
   font-family: var(--font-body), Arial, sans-serif;
 }
@@ -51,9 +73,9 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-muted-navy);
+  border-bottom: 1px solid rgba(192, 138, 92, 0.38);
   padding: 1rem clamp(1.25rem, 4vw, 3rem);
-  background: rgba(20, 22, 49, 0.88);
+  background: rgba(13, 17, 64, 0.82);
   backdrop-filter: blur(16px);
 }
 
@@ -63,7 +85,10 @@ button:disabled {
 }
 
 .brand-mark {
-  color: var(--color-copper);
+  background: var(--gradient-copper-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.22em;
@@ -93,18 +118,29 @@ button:disabled {
 }
 
 .hero {
+  position: relative;
   width: min(100%, 58rem);
-  border: 1px solid var(--color-muted-navy);
+  border: 1px solid rgba(192, 138, 92, 0.42);
   padding: clamp(2rem, 7vw, 5rem);
-  background: var(--color-panel);
+  background:
+    linear-gradient(126deg, rgba(84, 100, 216, 0.28) 0%, transparent 38%),
+    linear-gradient(300deg, rgba(236, 190, 142, 0.1) 0%, transparent 42%),
+    var(--color-panel);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 190, 142, 0.28),
+    0 32px 64px rgba(6, 8, 30, 0.55);
 }
 
 .eyebrow {
   margin: 0 0 1rem;
-  color: var(--color-copper);
+  background: var(--gradient-copper-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.22em;
+  width: fit-content;
 }
 
 h1 {
@@ -150,16 +186,26 @@ p {
   display: inline-flex;
   align-items: center;
   min-height: 3rem;
-  border: 1px solid var(--color-copper);
+  border: 1px solid var(--color-copper-light);
   padding: 0.8rem 1.25rem;
-  background: var(--color-copper);
-  color: var(--color-navy);
+  background: var(--gradient-copper);
+  color: var(--color-royal-deep);
   font-weight: 700;
   text-decoration: none;
+  text-shadow: 0 1px 0 rgba(245, 240, 230, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 240, 230, 0.5),
+    inset 0 -2px 4px rgba(80, 46, 14, 0.35),
+    0 10px 24px rgba(192, 138, 92, 0.28);
+  transition: filter 160ms ease, box-shadow 160ms ease;
 }
 
 .button:hover {
-  background: #d19a6e;
+  filter: brightness(1.1);
+  box-shadow:
+    inset 0 1px 0 rgba(245, 240, 230, 0.6),
+    inset 0 -2px 4px rgba(80, 46, 14, 0.3),
+    0 14px 32px rgba(192, 138, 92, 0.4);
 }
 
 .button:focus-visible,
@@ -196,7 +242,7 @@ input:focus-visible,
 .split-section {
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
   align-items: end;
-  border-block: 1px solid var(--color-muted-navy);
+  border-block: 1px solid rgba(192, 138, 92, 0.35);
   padding-block: clamp(2rem, 6vw, 4rem);
 }
 
@@ -210,8 +256,18 @@ input:focus-visible,
 .signup-panel,
 .cart-panel,
 .empty-state {
-  border: 1px solid var(--color-muted-navy);
-  background: var(--color-panel);
+  border: 1px solid rgba(192, 138, 92, 0.32);
+  background:
+    linear-gradient(122deg, rgba(84, 100, 216, 0.22) 0%, transparent 46%),
+    linear-gradient(302deg, rgba(236, 190, 142, 0.08) 0%, transparent 40%),
+    var(--color-panel);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 190, 142, 0.2),
+    0 24px 48px rgba(6, 8, 30, 0.4);
+}
+
+.ingredient-card:hover {
+  border-color: rgba(236, 190, 142, 0.55);
 }
 
 .ingredient-card {
@@ -255,10 +311,15 @@ label {
 
 input {
   width: 100%;
-  border: 1px solid var(--color-muted-navy);
+  border: 1px solid rgba(192, 138, 92, 0.4);
   padding: 0.85rem 1rem;
-  background: rgba(245, 240, 230, 0.08);
+  background: rgba(13, 17, 64, 0.55);
   color: var(--color-cream);
+}
+
+input:hover,
+input:focus {
+  border-color: var(--color-copper-light);
 }
 
 input::placeholder {
@@ -288,10 +349,14 @@ input::placeholder {
   min-height: clamp(22rem, 42vw, 36rem);
   overflow: hidden;
   place-items: center;
-  border: 1px solid var(--color-muted-navy);
+  border: 1px solid rgba(192, 138, 92, 0.42);
   background:
-    linear-gradient(135deg, rgba(192, 138, 92, 0.22), transparent),
+    linear-gradient(135deg, rgba(236, 190, 142, 0.28), transparent 55%),
+    linear-gradient(315deg, rgba(44, 58, 160, 0.5), transparent 60%),
     rgba(245, 240, 230, 0.05);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 190, 142, 0.3),
+    0 32px 64px rgba(6, 8, 30, 0.5);
 }
 
 .product-image {
@@ -306,11 +371,21 @@ input::placeholder {
   width: min(70%, 22rem);
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid rgba(245, 240, 230, 0.24);
+  border: 1px solid rgba(236, 190, 142, 0.45);
   border-radius: 999px;
-  color: var(--color-copper);
+  background: radial-gradient(circle at 35% 30%, rgba(236, 190, 142, 0.16), transparent 65%);
+  box-shadow:
+    inset 0 1px 0 rgba(236, 190, 142, 0.3),
+    0 0 48px rgba(192, 138, 92, 0.22);
   font-weight: 800;
   letter-spacing: 0.22em;
+}
+
+.product-placeholder span {
+  background: var(--gradient-copper-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .product-copy h1 {
@@ -319,7 +394,11 @@ input::placeholder {
 
 .product-price {
   margin: 1.5rem 0 0;
-  color: var(--color-copper);
+  background: var(--gradient-copper-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  width: fit-content;
   font-size: 1.3rem;
   font-weight: 800;
 }
@@ -357,7 +436,7 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
-  border-top: 1px solid var(--color-muted-navy);
+  border-top: 1px solid rgba(192, 138, 92, 0.28);
   padding-top: 1rem;
 }
 
@@ -374,7 +453,11 @@ input::placeholder {
   display: inline-flex;
   align-items: center;
   align-self: start;
-  border: 1px solid var(--color-muted-navy);
+  border: 1px solid rgba(192, 138, 92, 0.45);
+}
+
+.quantity-controls button:hover {
+  color: var(--color-copper-light);
 }
 
 .quantity-controls button {
@@ -393,7 +476,7 @@ input::placeholder {
 .cart-total {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--color-muted-navy);
+  border-top: 1px solid rgba(192, 138, 92, 0.4);
   margin: 2rem 0;
   padding-top: 1rem;
   font-size: 1.15rem;
