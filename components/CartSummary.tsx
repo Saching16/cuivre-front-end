@@ -8,6 +8,10 @@ import {
 } from "@/lib/browser/cart-storage";
 import type { ShopifyCart, ShopifyCartLine } from "@/lib/shopify/types";
 
+type CartSummaryProps = {
+  checkoutStatus?: string;
+};
+
 function formatMoney(amount: string, currencyCode: string) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -15,11 +19,28 @@ function formatMoney(amount: string, currencyCode: string) {
   }).format(Number(amount));
 }
 
-export function CartSummary() {
+function checkoutMessage(status?: string) {
+  if (status === "failed") {
+    return "Checkout could not be started. Please try again.";
+  }
+
+  if (status === "empty-cart") {
+    return "Add the moisturizer to your cart before checkout.";
+  }
+
+  if (status === "missing-cart") {
+    return "Your cart could not be found. Add the moisturizer again to continue.";
+  }
+
+  return null;
+}
+
+export function CartSummary({ checkoutStatus }: CartSummaryProps) {
   const [cart, setCart] = useState<ShopifyCart | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "empty" | "error">(
     "loading"
   );
+  const message = checkoutMessage(checkoutStatus);
 
   async function loadCart() {
     const cartId = getStoredCartId();
@@ -89,13 +110,19 @@ export function CartSummary() {
   }, []);
 
   if (status === "loading") {
-    return <p className="muted-copy">Loading cart.</p>;
+    return (
+      <div className="empty-state">
+        {message ? <p className="form-note form-note-error">{message}</p> : null}
+        <p className="muted-copy">Loading cart.</p>
+      </div>
+    );
   }
 
   if (status === "empty") {
     return (
       <div className="empty-state">
         <h1>Your cart is empty.</h1>
+        {message ? <p className="form-note form-note-error">{message}</p> : null}
         <p className="hero-copy">
           The moisturizer will appear here after it is added from the product
           page.
@@ -119,6 +146,7 @@ export function CartSummary() {
   return (
     <section className="cart-panel" aria-labelledby="cart-heading">
       <h1 id="cart-heading">Your cart</h1>
+      {message ? <p className="form-note form-note-error">{message}</p> : null}
       <div className="cart-lines">
         {cart.lines.nodes.map((line) => (
           <article className="cart-line" key={line.id}>

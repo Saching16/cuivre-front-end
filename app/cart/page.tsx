@@ -6,10 +6,18 @@ export const metadata: Metadata = {
   description: "Review your CUIVRÉ cart before Shopify hosted checkout."
 };
 
-export default function CartPage() {
+type CartPageProps = {
+  searchParams: Promise<{
+    checkout?: string;
+  }>;
+};
+
+export default async function CartPage({ searchParams }: CartPageProps) {
+  const { checkout } = await searchParams;
+
   return (
     <main className="page-shell narrow-shell">
-      <CartSummary />
+      <CartSummary checkoutStatus={checkout} />
     </main>
   );
 }

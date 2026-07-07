@@ -15,7 +15,13 @@ export async function GET(request: Request) {
     return NextResponse.redirect(cartUrl(request, "missing-cart"));
   }
 
-  const cart = await getCart(cartId);
+  let cart;
+
+  try {
+    cart = await getCart(cartId);
+  } catch {
+    return NextResponse.redirect(cartUrl(request, "failed"));
+  }
 
   if (!cart?.checkoutUrl || cart.totalQuantity < 1) {
     return NextResponse.redirect(cartUrl(request, "empty-cart"));
